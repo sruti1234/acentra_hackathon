@@ -1,0 +1,21 @@
+# ---------- .NET ----------
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.log
+appsettings.*.local.json
+
+# ---------- Node / React ----------
+node_modules/
+dist/
+.env.local
+.env.*.local
+
+# ---------- Editors / OS ----------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

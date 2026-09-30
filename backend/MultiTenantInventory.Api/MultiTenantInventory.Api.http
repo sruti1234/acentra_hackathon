@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:5000
+
+### Health
+GET {{baseUrl}}/api/health
+
+### 1. Login (copy "token" from the response into @token below)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "demo@example.com", "password": "Demo@123" }
+
+###
+@token = PASTE_TOKEN_HERE
+
+### My organizations
+GET {{baseUrl}}/api/tenants/my-tenants
+Authorization: Bearer {{token}}
+
+### Tenant 1 inventory
+GET {{baseUrl}}/api/products
+Authorization: Bearer {{token}}
+X-Tenant-ID: 1
+
+### Tenant 2 inventory
+GET {{baseUrl}}/api/products
+Authorization: Bearer {{token}}
+X-Tenant-ID: 2
+
+### Tenant 1 asking for a tenant 2 product (id 5 = Smartphone) -> 404
+GET {{baseUrl}}/api/products/5
+Authorization: Bearer {{token}}
+X-Tenant-ID: 1
+
+### Create (tenantId in the body is ignored)
+POST {{baseUrl}}/api/products
+Authorization: Bearer {{token}}
+X-Tenant-ID: 1
+Content-Type: application/json
+
+{ "name": "Webcam", "description": "HD webcam", "quantity": 5, "price": 2500 }
